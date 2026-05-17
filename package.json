@@ -1,0 +1,12 @@
+{
+  "name": "invoice-extractor-fullstack",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd backend && npm install && npm run dev",
+    "dev:frontend": "cd frontend && npm install && npm start",
+    "build:backend": "cd backend && npm install && npm run build",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "build": "npm run build:frontend && npm run build:backend",
+    "start": "cd backend && npm install && npm run start"
+  }
+}
