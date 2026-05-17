@@ -1,90 +1,133 @@
-# AI Invoice Data Extractor
+# 🧾 AI Invoice Data Extractor
 
-A full-stack invoice extraction application built with Angular on the frontend and Node.js/Express on the backend. It accepts PDF, PNG, JPG, and JPEG invoices, extracts text from documents, and uses the Google Gemini/Gemma AI agent to parse structured invoice data.
+## Overview
+AI Invoice Data Extractor is a full-stack application built with **Angular (frontend)** and **Node.js/Express (backend)** that automates invoice processing using a hybrid **OCR + AI pipeline**. The system extracts structured invoice data from uploaded files (PDF, PNG, JPG, JPEG) and converts them into clean JSON using a Google Gemini/Gemma AI agent.
 
-## Features
+---
 
-- Drag-and-drop invoice upload
-- PDF parsing and image OCR
-- AI-powered invoice structure extraction
-- Responsive Tailwind UI with Angular standalone components
-- Structured invoice output with line items and confidence score
-- Retry logic for AI failures
-- CORS, validation, and error middleware
-- Docker-ready full-stack deployment
+## 🚀 Features
 
-## Folder structure
+### 📤 File Upload
+- Drag-and-drop invoice upload support
+- Accepts PDF, PNG, JPG, JPEG formats
 
-- `frontend/` - Angular application
-- `backend/` - Express TypeScript API
-- `Dockerfile` - full-stack production build
-- `.env.example` - environment variable template
+### 📄 Text Extraction
+- PDF parsing using `pdf-parse`
+- Image OCR using `Tesseract.js`
+- Automatic detection of file type
 
-## Quick start
+### 🧹 Text Processing
+- Noise removal and cleaning
+- Normalization of extracted raw text
+- Removal of system/UI logs or irrelevant content
 
-1. Copy environment variables:
+### 🧠 AI Processing
+- Uses Google Gemini / Gemma AI model
+- Converts unstructured text into structured invoice JSON
+- Extracts invoice fields and line items
 
-```bash
-cp backend/.env.example backend/.env
-```
+### 🧾 Structured Output
+- Invoice number
+- Vendor & customer details
+- Dates (invoice, due date)
+- Currency, subtotal, tax, total
+- Line items (description, quantity, unit price, total)
+- Confidence score for extraction accuracy
 
-2. Add your Google API key to `backend/.env`:
+### ⚙️ Backend Safety Layer
+- Validates AI response before sending to frontend
+- Prevents invalid values (e.g. NaN)
+- Ensures consistent schema mapping
+- Centralized error handling
 
-```text
-GOOGLE_API_KEY=your_google_api_key_here
-```
+### 🎨 Frontend UI
+- Built with Angular standalone components
+- Responsive design using Tailwind
+- Displays invoice details in structured tables
+- Confidence score visualization bar
 
-3. Start the backend:
+### 🐳 Deployment
+- Docker-ready full-stack application
+- Supports production deployment easily
 
-```bash
-cd backend
-npm install
-npm run dev
-```
+---
 
-4. Start the frontend:
+## ⚙️ System Workflow
 
-```bash
-cd frontend
-npm install
-npm start
-```
+1. User uploads invoice file
+2. Backend detects file type
+3. PDF → extracted using pdf-parse
+4. Image → processed using Tesseract OCR
+5. Extracted text is cleaned and normalized
+6. Clean text is sent to Gemini/Gemma AI
+7. AI returns structured JSON output
+8. Backend validates and maps response
+9. Frontend displays formatted invoice data
 
-5. Open `http://localhost:4200`
+---
 
-> The frontend sends requests to `/api/invoices/extract`. CORS is configured so local development works with the backend running on `http://localhost:4000`.
+## 🧠 AI Pipeline
 
-## API
+- OCR/PDF → Raw Text
+- Text Cleaning → Structured Input
+- AI Model → Invoice JSON Extraction
+- Validation Layer → Safe Data Output
+- Frontend → UI Rendering
 
-`POST /api/invoices/extract`
+---
 
-Request: `multipart/form-data` with field `invoice`.
+## 🧱 Tech Stack
 
-Response:
+### Backend
+- Node.js
+- Express
+- TypeScript
+- Tesseract.js
+- pdf-parse
+- Google Gemini / Gemma AI
 
+### Frontend
+- Angular
+- TypeScript
+- Tailwind CSS
+
+### DevOps
+- Docker
+
+---
+
+## 📡 API
+
+### POST `/api/invoices/extract`
+
+**Request:**
+- multipart/form-data
+- field: `invoice`
+
+**Response:**
 ```json
 {
-  "invoiceNumber": "",
-  "vendorName": "",
-  "customerName": "",
-  "invoiceDate": "",
-  "dueDate": "",
-  "subtotal": 0,
-  "tax": 0,
-  "totalAmount": 0,
-  "currency": "",
-  "paymentTerms": "",
+  "invoiceNumber": "INV-001",
+  "vendorName": "Tech Solutions",
+  "customerName": "Ahmed Ali",
+  "invoiceDate": "2026-05-10",
+  "dueDate": "2026-05-20",
+  "subtotal": 8000,
+  "tax": 800,
+  "totalAmount": 8800,
+  "currency": "USD",
+  "paymentTerms": "Net 10",
   "lineItems": [
     {
-      "name": "",
-      "quantity": 0,
-      "price": 0
+      "description": "Web Development Service",
+      "quantity": 1,
+      "unitPrice": 5000,
+      "total": 5000
     }
   ],
-  "confidenceScore": 0
+  "confidenceScore": 1
 }
 ```
-
 ## Docker
 
 Build and run the full application with Docker:
