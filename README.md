@@ -1,32 +1,32 @@
-# 🧾 AI Invoice Data Extractor
+#  AI Invoice Data Extractor
 
 ## Overview
 AI Invoice Data Extractor is a full-stack application built with **Angular (frontend)** and **Node.js/Express (backend)** that automates invoice processing using a hybrid **OCR + AI pipeline**. The system extracts structured invoice data from uploaded files (PDF, PNG, JPG, JPEG) and converts them into clean JSON using a Google Gemini/Gemma AI agent.
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 📤 File Upload
+###  File Upload
 - Drag-and-drop invoice upload support
 - Accepts PDF, PNG, JPG, JPEG formats
 
-### 📄 Text Extraction
+###  Text Extraction
 - PDF parsing using `pdf-parse`
 - Image OCR using `Tesseract.js`
 - Automatic detection of file type
 
-### 🧹 Text Processing
+###  Text Processing
 - Noise removal and cleaning
 - Normalization of extracted raw text
 - Removal of system/UI logs or irrelevant content
 
-### 🧠 AI Processing
+###  AI Processing
 - Uses Google Gemini / Gemma AI model
 - Converts unstructured text into structured invoice JSON
 - Extracts invoice fields and line items
 
-### 🧾 Structured Output
+###  Structured Output
 - Invoice number
 - Vendor & customer details
 - Dates (invoice, due date)
@@ -34,25 +34,25 @@ AI Invoice Data Extractor is a full-stack application built with **Angular (fron
 - Line items (description, quantity, unit price, total)
 - Confidence score for extraction accuracy
 
-### ⚙️ Backend Safety Layer
+###  Backend Safety Layer
 - Validates AI response before sending to frontend
 - Prevents invalid values (e.g. NaN)
 - Ensures consistent schema mapping
 - Centralized error handling
 
-### 🎨 Frontend UI
+###  Frontend UI
 - Built with Angular standalone components
 - Responsive design using Tailwind
 - Displays invoice details in structured tables
 - Confidence score visualization bar
 
-### 🐳 Deployment
+###  Deployment
 - Docker-ready full-stack application
 - Supports production deployment easily
 
 ---
 
-## ⚙️ System Workflow
+##  System Workflow
 
 1. User uploads invoice file
 2. Backend detects file type
@@ -66,7 +66,7 @@ AI Invoice Data Extractor is a full-stack application built with **Angular (fron
 
 ---
 
-## 🧠 AI Pipeline
+##  AI Pipeline
 
 - OCR/PDF → Raw Text
 - Text Cleaning → Structured Input
@@ -76,7 +76,7 @@ AI Invoice Data Extractor is a full-stack application built with **Angular (fron
 
 ---
 
-## 🧱 Tech Stack
+##  Tech Stack
 
 ### Backend
 - Node.js
@@ -96,7 +96,7 @@ AI Invoice Data Extractor is a full-stack application built with **Angular (fron
 
 ---
 
-## 📡 API
+##  API
 
 ### POST `/api/invoices/extract`
 
